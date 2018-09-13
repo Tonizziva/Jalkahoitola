@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="Ajanvaraus">
+      <EntityTypeMapping TypeName="Database1Model.Ajanvaraus">
+        <MappingFragment StoreEntitySet="Ajanvaraus">
+          <ScalarProperty Name="VarausID" ColumnName="VarausID" />
+          <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+          <ScalarProperty Name="TyontekijaID" ColumnName="TyontekijaID" />
+          <ScalarProperty Name="pvm" ColumnName="pvm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Asiakas">
+      <EntityTypeMapping TypeName="Database1Model.Asiakas">
+        <MappingFragment StoreEntitySet="Asiakas">
+          <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+          <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+          <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+          <ScalarProperty Name="Postiosoite" ColumnName="Postiosoite" />
+          <ScalarProperty Name="Postitmp" ColumnName="Postitmp" />
+          <ScalarProperty Name="Puhnro" ColumnName="Puhnro" />
+          <ScalarProperty Name="Sposti" ColumnName="Sposti" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tyontekija">
+      <EntityTypeMapping TypeName="Database1Model.Tyontekija">
+        <MappingFragment StoreEntitySet="Tyontekija">
+          <ScalarProperty Name="TyontekijaID" ColumnName="TyontekijaID" />
+          <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+          <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+          <ScalarProperty Name="Puhnro" ColumnName="Puhnro" />
+          <ScalarProperty Name="Sposti" ColumnName="Sposti" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

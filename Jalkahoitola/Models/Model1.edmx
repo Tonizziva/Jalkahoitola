@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ajanvaraus">
+          <Key>
+            <PropertyRef Name="VarausID" />
+          </Key>
+          <Property Name="VarausID" Type="int" Nullable="false" />
+          <Property Name="AsiakasID" Type="int" Nullable="false" />
+          <Property Name="TyontekijaID" Type="int" Nullable="false" />
+          <Property Name="pvm" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asiakas">
+          <Key>
+            <PropertyRef Name="AsiakasID" />
+          </Key>
+          <Property Name="AsiakasID" Type="int" Nullable="false" />
+          <Property Name="Sukunimi" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Etunimi" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Postiosoite" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Postitmp" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Puhnro" Type="nvarchar" MaxLength="15" />
+          <Property Name="Sposti" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tyontekija">
+          <Key>
+            <PropertyRef Name="TyontekijaID" />
+          </Key>
+          <Property Name="TyontekijaID" Type="int" Nullable="false" />
+          <Property Name="Sukunimi" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Etunimi" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Puhnro" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Sposti" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Ajanvarau__Tyont__34C8D9D1">
+          <End Role="Tyontekija" Type="Self.Tyontekija" Multiplicity="1" />
+          <End Role="Ajanvaraus" Type="Self.Ajanvaraus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tyontekija">
+              <PropertyRef Name="TyontekijaID" />
+            </Principal>
+            <Dependent Role="Ajanvaraus">
+              <PropertyRef Name="TyontekijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ajanvaraus__pvm__33D4B598">
+          <End Role="Asiakas" Type="Self.Asiakas" Multiplicity="1" />
+          <End Role="Ajanvaraus" Type="Self.Ajanvaraus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakas">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Ajanvaraus">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="Ajanvaraus" EntityType="Self.Ajanvaraus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asiakas" EntityType="Self.Asiakas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tyontekija" EntityType="Self.Tyontekija" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Ajanvarau__Tyont__34C8D9D1" Association="Self.FK__Ajanvarau__Tyont__34C8D9D1">
+            <End Role="Tyontekija" EntitySet="Tyontekija" />
+            <End Role="Ajanvaraus" EntitySet="Ajanvaraus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ajanvaraus__pvm__33D4B598" Association="Self.FK__Ajanvaraus__pvm__33D4B598">
+            <End Role="Asiakas" EntitySet="Asiakas" />
+            <End Role="Ajanvaraus" EntitySet="Ajanvaraus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ajanvaraus">
+          <Key>
+            <PropertyRef Name="VarausID" />
+          </Key>
+          <Property Name="VarausID" Type="Int32" Nullable="false" />
+          <Property Name="AsiakasID" Type="Int32" Nullable="false" />
+          <Property Name="TyontekijaID" Type="Int32" Nullable="false" />
+          <Property Name="pvm" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Tyontekija" Relationship="Self.FK__Ajanvarau__Tyont__34C8D9D1" FromRole="Ajanvaraus" ToRole="Tyontekija" />
+          <NavigationProperty Name="Asiakas" Relationship="Self.FK__Ajanvaraus__pvm__33D4B598" FromRole="Ajanvaraus" ToRole="Asiakas" />
+        </EntityType>
+        <EntityType Name="Asiakas">
+          <Key>
+            <PropertyRef Name="AsiakasID" />
+          </Key>
+          <Property Name="AsiakasID" Type="Int32" Nullable="false" />
+          <Property Name="Sukunimi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Etunimi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Postiosoite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Postitmp" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Puhnro" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Sposti" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ajanvaraus" Relationship="Self.FK__Ajanvaraus__pvm__33D4B598" FromRole="Asiakas" ToRole="Ajanvaraus" />
+        </EntityType>
+        <EntityType Name="Tyontekija">
+          <Key>
+            <PropertyRef Name="TyontekijaID" />
+          </Key>
+          <Property Name="TyontekijaID" Type="Int32" Nullable="false" />
+          <Property Name="Sukunimi" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Etunimi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Puhnro" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sposti" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ajanvaraus" Relationship="Self.FK__Ajanvarau__Tyont__34C8D9D1" FromRole="Tyontekija" ToRole="Ajanvaraus" />
+        </EntityType>
+        <Association Name="FK__Ajanvarau__Tyont__34C8D9D1">
+          <End Role="Tyontekija" Type="Self.Tyontekija" Multiplicity="1" />
+          <End Role="Ajanvaraus" Type="Self.Ajanvaraus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tyontekija">
+              <PropertyRef Name="TyontekijaID" />
+            </Principal>
+            <Dependent Role="Ajanvaraus">
+              <PropertyRef Name="TyontekijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ajanvaraus__pvm__33D4B598">
+          <End Role="Asiakas" Type="Self.Asiakas" Multiplicity="1" />
+          <End Role="Ajanvaraus" Type="Self.Ajanvaraus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakas">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Ajanvaraus">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ajanvaraus" EntityType="Self.Ajanvaraus" />
+          <EntitySet Name="Asiakas" EntityType="Self.Asiakas" />
+          <EntitySet Name="Tyontekija" EntityType="Self.Tyontekija" />
+          <AssociationSet Name="FK__Ajanvarau__Tyont__34C8D9D1" Association="Self.FK__Ajanvarau__Tyont__34C8D9D1">
+            <End Role="Tyontekija" EntitySet="Tyontekija" />
+            <End Role="Ajanvaraus" EntitySet="Ajanvaraus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ajanvaraus__pvm__33D4B598" Association="Self.FK__Ajanvaraus__pvm__33D4B598">
+            <End Role="Asiakas" EntitySet="Asiakas" />
+            <End Role="Ajanvaraus" EntitySet="Ajanvaraus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="Ajanvaraus">
+            <EntityTypeMapping TypeName="Database1Model.Ajanvaraus">
+              <MappingFragment StoreEntitySet="Ajanvaraus">
+                <ScalarProperty Name="VarausID" ColumnName="VarausID" />
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="TyontekijaID" ColumnName="TyontekijaID" />
+                <ScalarProperty Name="pvm" ColumnName="pvm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asiakas">
+            <EntityTypeMapping TypeName="Database1Model.Asiakas">
+              <MappingFragment StoreEntitySet="Asiakas">
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Postiosoite" ColumnName="Postiosoite" />
+                <ScalarProperty Name="Postitmp" ColumnName="Postitmp" />
+                <ScalarProperty Name="Puhnro" ColumnName="Puhnro" />
+                <ScalarProperty Name="Sposti" ColumnName="Sposti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tyontekija">
+            <EntityTypeMapping TypeName="Database1Model.Tyontekija">
+              <MappingFragment StoreEntitySet="Tyontekija">
+                <ScalarProperty Name="TyontekijaID" ColumnName="TyontekijaID" />
+                <ScalarProperty Name="Sukunimi" ColumnName="Sukunimi" />
+                <ScalarProperty Name="Etunimi" ColumnName="Etunimi" />
+                <ScalarProperty Name="Puhnro" ColumnName="Puhnro" />
+                <ScalarProperty Name="Sposti" ColumnName="Sposti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

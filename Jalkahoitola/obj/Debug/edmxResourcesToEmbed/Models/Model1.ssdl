@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Ajanvaraus">
+    <Key>
+      <PropertyRef Name="VarausID" />
+    </Key>
+    <Property Name="VarausID" Type="int" Nullable="false" />
+    <Property Name="AsiakasID" Type="int" Nullable="false" />
+    <Property Name="TyontekijaID" Type="int" Nullable="false" />
+    <Property Name="pvm" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Asiakas">
+    <Key>
+      <PropertyRef Name="AsiakasID" />
+    </Key>
+    <Property Name="AsiakasID" Type="int" Nullable="false" />
+    <Property Name="Sukunimi" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Etunimi" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Postiosoite" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Postitmp" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Puhnro" Type="nvarchar" MaxLength="15" />
+    <Property Name="Sposti" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tyontekija">
+    <Key>
+      <PropertyRef Name="TyontekijaID" />
+    </Key>
+    <Property Name="TyontekijaID" Type="int" Nullable="false" />
+    <Property Name="Sukunimi" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Etunimi" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Puhnro" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Sposti" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Ajanvarau__Tyont__34C8D9D1">
+    <End Role="Tyontekija" Type="Self.Tyontekija" Multiplicity="1" />
+    <End Role="Ajanvaraus" Type="Self.Ajanvaraus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tyontekija">
+        <PropertyRef Name="TyontekijaID" />
+      </Principal>
+      <Dependent Role="Ajanvaraus">
+        <PropertyRef Name="TyontekijaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ajanvaraus__pvm__33D4B598">
+    <End Role="Asiakas" Type="Self.Asiakas" Multiplicity="1" />
+    <End Role="Ajanvaraus" Type="Self.Ajanvaraus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asiakas">
+        <PropertyRef Name="AsiakasID" />
+      </Principal>
+      <Dependent Role="Ajanvaraus">
+        <PropertyRef Name="AsiakasID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Ajanvaraus" EntityType="Self.Ajanvaraus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Asiakas" EntityType="Self.Asiakas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tyontekija" EntityType="Self.Tyontekija" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Ajanvarau__Tyont__34C8D9D1" Association="Self.FK__Ajanvarau__Tyont__34C8D9D1">
+      <End Role="Tyontekija" EntitySet="Tyontekija" />
+      <End Role="Ajanvaraus" EntitySet="Ajanvaraus" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ajanvaraus__pvm__33D4B598" Association="Self.FK__Ajanvaraus__pvm__33D4B598">
+      <End Role="Asiakas" EntitySet="Asiakas" />
+      <End Role="Ajanvaraus" EntitySet="Ajanvaraus" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
